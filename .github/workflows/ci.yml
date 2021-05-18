@@ -4,23 +4,18 @@
 name: Node.js CI
 
 on:
-  push
+  push # Execute this workflow on every push
 
 jobs:
   lint:
     runs-on: self-hosted
 
-    strategy:
-      matrix:
-        node-version: [15.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 15.x
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 15.x
       - run: yarn install
       - run: yarn run eslint > eslint-output
       - name: Save eslint-output
@@ -33,17 +28,12 @@ jobs:
     needs: lint
     runs-on: self-hosted
 
-    strategy:
-      matrix:
-        node-version: [15.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 15.x
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 15.x
       - run: yarn install
       - run: yarn build
       - run: yarn test > jest-output
