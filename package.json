@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=development yarn run webpack",
-    "build": "yarn run webpack",
+    "build": "NODE_ENV=production yarn run webpack",
     "test": "yarn run jest",
     "lint": "yarn run eslint ./src"
   },
